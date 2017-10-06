@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="Stations.xsd" generated="2017-10-04T16:50:28">
+<Stations>
+<station_name>Alternative Hits</station_name>
+<station_genre>alternative</station_genre>
+<station_address>http://rfcmedia.streamguys1.com:80/alternativehits.mp3</station_address>
+</Stations>
+<Stations>
+<station_name>BBC News</station_name>
+<station_genre>News</station_genre>
+<station_address>http://bbcwssc.ic.llnwd.net/stream/bbcwssc_mp1_ws-einws</station_address>
+</Stations>
+<Stations>
+<station_name>CNN News</station_name>
+<station_genre>News</station_genre>
+<station_address>http://tunein.streamguys1.com/cnn</station_address>
+</Stations>
+<Stations>
+<station_name>Pulse Music</station_name>
+<station_genre>Pop</station_genre>
+<station_address>http://rfcmedia.streamguys1.com/MusicPulse.mp3</station_address>
+</Stations>
+<Stations>
+<station_name>Mix Lite</station_name>
+<station_genre>Pop</station_genre>
+<station_address>http://rfcmedia.streamguys1.com/mixlite.mp3</station_address>
+</Stations>
+<Stations>
+<station_name>Rock on</station_name>
+<station_genre>Rock</station_genre>
+<station_address>http://rfcmedia.streamguys1.com/RockOn.mp3</station_address>
+</Stations>
+<Stations>
+<station_name>Country Hits</station_name>
+<station_genre>Country</station_genre>
+<station_address>http://rfcmedia.streamguys1.com/countryhits.aac</station_address>
+</Stations>
+</dataroot>
