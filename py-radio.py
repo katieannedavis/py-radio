@@ -3,9 +3,10 @@ import sys
 import xml.etree.ElementTree as ET
 from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QGridLayout,
         QGroupBox, QHBoxLayout, QLabel, QLineEdit, QPushButton, QTreeView, QVBoxLayout,
-        QWidget) 
+        QWidget, QButtonGroup) 
 from PyQt5.QtGui import QStandardItemModel
 from PyQt5.QtCore import Qt
+from PyQt5.Qt import QRadioButton
 
 file_name = 'Stations.xml'
 
@@ -30,6 +31,33 @@ for c in stations:
 stationAddressDirectory = dict(zip(sName, sAddress))
 stationGenreDirectory = dict(zip(sName, sGenre))   
 
+class RadioButtonWidget(QWidget):
+    """this class creates a group of radio buttons from a given list of labels"""
+    
+    #constructor
+    def __init__(self, label, instruction, button_list):
+        super().__init__() 
+        
+        self.title_label = QLabel(label)
+        self.radio_group_box = QGroupBox(instruction)
+        self.radio_button_group = QButtonGroup()
+        
+        #create the radio buttons
+        self.radio_button_list = []
+        for each in button_list:
+            self. radio_button_list.append(QRadioButton(each))
+        
+        self.radio_button_list[0].setChecked(True)
+        
+        self.radio_button_layout = QVBoxLayout()
+        
+        counter = 1
+        for each in self.radio_button_list:
+            self.radio_button_layout.addWidget(each)
+            self.radio_button_group.addButton(each)
+            self.radio_button_group.setId(each, counter)
+            counter += 1
+        
 
 class Radio(QWidget):
     def start_music(self, musicAddress):
@@ -76,12 +104,17 @@ class Radio(QWidget):
         self.setGeometry(self.left, self.top, self.width, self.height)
         
         i = 10
+        j = 0
         choice = " "
+        NumGridRows = len(stationAddressDirectory.keys()) - 1
+        NumButtons = len(stationAddressDirectory.keys())
+        print(NumGridRows)
         for key in stationAddressDirectory:
             self.playButton(stationAddressDirectory[key], i, key)
             i = i + 50
             print(key, 'corresponds to', stationAddressDirectory[key], 'and', stationGenreDirectory[key])
-        
+
+        print(NumButtons)
         button2 = QPushButton('Stop Music', self)
         button2.setStyleSheet("font-size:19px;" 
                              "background-color:red;" 
@@ -92,12 +125,10 @@ class Radio(QWidget):
                              "padding: 2px;")
         button2.move(150, 500)
         button2.clicked.connect(self.stop_music)
-        
-
-           
+                  
         self.show()
         
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = Radio()
-    sys.exit(app.exec_())
+    sys.exit(ex.exec_())
