@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 class Radio(QWidget):
     def __init__(self):
         super().__init__()
+
         self.title = "Py-Radio"
         self.left = 100
         self.top = 100
@@ -17,22 +18,29 @@ class Radio(QWidget):
         self.initUI()
 
     def initUI(self):
+        #Open StyleSheet, Read it, then set it as application stylesheet
+        file = QFile('style.qss')
+        file.open(QFile.ReadOnly)
+
+        style = file.readAll()
+        style = str(style, encoding='utf8')
+        self.setStyleSheet(style)
+
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
-
         self.createRadio()
 
         windowLayout = QVBoxLayout()
         windowLayout.addWidget(self.horizontalGroupBox)
         self.setLayout(windowLayout)
-        
-    #Constructor function for radio
+
+    # Constructor function for radio
     def createRadio(self):
         file_name = 'Stations.xml'
         dom = ET.parse(file_name)
         stations = dom.findall('Stations')
         stationDict = {}
-        
+
         for station in stations:
             stationName = station.find('station_name').text
             stationGenre = station.find('station_genre').text
@@ -43,7 +51,7 @@ class Radio(QWidget):
         radioStations = []
         radioGenre = []
         radioAddress = []
-        
+
         for key in stationDict.keys():
             radioStations.append(key)
             radioGenre.append(stationDict[key][0])
@@ -62,18 +70,11 @@ class Radio(QWidget):
             radiobutton.toggled.connect(self.on_radio_button_toggled)
             layout.addWidget(radiobutton, i, 0)
             i += 1
-            
+
         stopButton = QPushButton('Stop Music', self)
-        stopButton.setStyleSheet("font-size:12px;" 
-                             "background-color:red;" 
-                             "color:white;"
-                             "border-style: outset;"
-                             "border-width: 1px;"
-                             "border-color: grey;"
-                             "padding: 1px;")
-        
+        stopButton.setObjectName('StopButton')
         stopButton.clicked.connect(self.stopRadio)
-        layout.addWidget(stopButton, 0,2)
+        layout.addWidget(stopButton, 0, 2)
 
         self.horizontalGroupBox.setLayout(layout)
 
@@ -86,15 +87,15 @@ class Radio(QWidget):
     # On radio button click, start playing radio station    
     def on_radio_button_toggled(self):
         choice = self.sender()
-        
+
         if choice.isChecked() == True:
-            
             vlc_path = "C:\Program Files (x86)\VideoLAN\VLC"
 
             os.chdir(vlc_path)
             subprocess.call("vlc -I dummy --dummy-quiet --one-instance " + choice.address)
-            
-if __name__=='__main__':
+
+
+if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = Radio()
     ex.show()
