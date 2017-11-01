@@ -1,0 +1,45 @@
+QWidget{
+    font-size:12px;
+    background-color:#3F51B5;
+    color:white;
+    padding: 1px;
+    }
+
+QGroupBox{
+    background-color: navy;
+	}
+
+QPushButton#StopButton{
+	font-size:14px;
+    background-color:#ff9100;
+    color:black;
+    border-style: outset;
+    border-width: 1px;
+    border-color: grey;
+    padding: 1px;
+	}
+
+QPushButton#StartButton{
+	font-size:14px;
+	image: url(images/play_button.png);
+    background-color:#ff9100;
+    color:black;
+    border-style: outset;
+    border-width: 1px;
+    border-color: grey;
+    padding: 1px;
+	}
+
+QRadioButton{
+    background-color: navy;
+    }
+
+QRadioButton::indicator:unchecked{
+    image: url(images/radio_unchecked_white.png);
+    width:30px;
+	}
+
+QRadioButton::indicator{
+    image: url(images/radio_button_checked_white.png);
+    width:30px;
+	}
